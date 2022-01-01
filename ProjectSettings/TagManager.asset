@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Clean
+  - Dragged
+  - cat
+  - esp
+  - eng
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Pieces
+  - Water
+  - UI
+  - 
+  - Slots
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Background
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 591347399
+    locked: 0
+  - name: Slots
+    uniqueID: 3178571509
+    locked: 0
+  - name: Pieces
+    uniqueID: 1991265403
+    locked: 0
+  - name: Balloons
+    uniqueID: 4090155635
+    locked: 0
