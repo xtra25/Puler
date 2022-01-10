@@ -105,14 +105,17 @@ public class SpawnController : MonoBehaviour
            
               collider = null;
               slotCenter = RandomizeSlotPositions();
-              collider = Physics2D.OverlapCircle(slotCenter, 1.5f);
+              collider = Physics2D.OverlapCircle(slotCenter, 3f);
            }
 
 
         Slot tempSlot = Instantiate(newSlot, slotCenter, Quaternion.identity);
         GameObject tempSlotAsGO = tempSlot.gameObject;
-        PolygonCollider2D polygonCollider2D = tempSlotAsGO.AddComponent<PolygonCollider2D>();
-        polygonCollider2D.isTrigger = true;
+        //PolygonCollider2D polygonCollider2D = tempSlotAsGO.AddComponent<PolygonCollider2D>();
+        //polygonCollider2D.isTrigger = true;
+        CircleCollider2D circleCollider2D = tempSlotAsGO.AddComponent<CircleCollider2D>();
+        circleCollider2D.isTrigger = true;
+        circleCollider2D.radius = 0.2F;
         tempSlot.name = tempSlot.name.Replace("(Clone)", "(Slot)").Trim();
 
     }
