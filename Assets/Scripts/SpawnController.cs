@@ -99,7 +99,7 @@ public class SpawnController : MonoBehaviour
         
         //Detecta amb l'overlapcircle si es solapen ( poder es podria fer també amb el raycast ?) 
           Collider2D collider=null;
-          collider = Physics2D.OverlapCircle(slotCenter, 1.5f);
+          collider = Physics2D.OverlapCircle(slotCenter, 3f);
            while (collider != null)
            {
            

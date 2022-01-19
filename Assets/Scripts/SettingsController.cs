@@ -120,7 +120,7 @@ public class SettingsController : MonoBehaviour
         if (result == rnd1+rnd2)
         {
             pnlDonate.SetActive(false);
-            Application.OpenURL("https://www.paypal.com/donate?hosted_button_id=W4J4TTCKFRVTE");
+          //  Application.OpenURL("https://www.paypal.com/donate?hosted_button_id=W4J4TTCKFRVTE");
         }else
             pnlDonate.SetActive(false);
     }

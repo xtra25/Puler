@@ -76,48 +76,15 @@ public class PiecesController : MonoBehaviour
             {
             touchedPiece.transform.position = new Vector2(mouseposition.x, mouseposition.y);
         }
-    }
-    
-  /*  private void ONTouchMove(Vector2 mouseposition, Collider2D collider)
-    { //TODO ONTouchMove OnMouseDrag
-        touchedPiece = GameObject.Find(collider.name);
-        if (touchedPiece.GetComponent<Piece>().isDragable)
-        {
-            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-            touchedPiece.transform.position = Camera.main.ScreenToWorldPoint(mousePos) + offset;
-        }
-    }*/
+    }    
+
     
     private void OnTouchUp()
     {//TODO  OnMouseUp
 
 
         touchedPiece.transform.position = origPos;
-        /*
-        //transform.position = origPos;
-        if (isTheSlot == true && touchedPiece.GetComponent<Piece>().isDraggable == true)
-        {
-            //asignar la variable de la posicio de slot guardada al ontrigger al transform de l'objecte arrossegat
-            //  Debug.Log("Eureka");
-            touchedPiece.transform.position = SlotPosition;
-            //bloquejar animal en concret
-            touchedPiece.GetComponent<Piece>().isDraggable = false;
-            gameManager.SlotsToFill--;
-            //SoundManager.PlaySound("piecesMoved");
-
-            //agafar el nom de la peça i fer el PlayPiece ( nomdelapeça)
-            //soundManager = FindObjectOfType<SoundManager>();
-            string piecename = touchedPiece.name;
-            piecename = piecename.Replace("(Piece)","");
-            soundManager.PlayPiece(piecename);
-
-        }
-        else if (touchedPiece.GetComponent<Piece>().isDragable == true)
-        {
-            touchedPiece.transform.position = origPos;
-            soundManager.PlaySound("piecesMoved");
-        }
-        */
+       
 
     }
     
