@@ -7,27 +7,11 @@ public class Piece : MonoBehaviour
 
     public bool isDragging;
     public bool isDraggable = true;
+    public bool isFinished;
 
     public bool isTheSlot;
     public Vector2 SlotPosition;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-      
-    }
-
-    // Update is called once per frame
-   
-       void Update()
-    {
-      
-       
-       
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

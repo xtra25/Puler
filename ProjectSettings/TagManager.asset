@@ -9,6 +9,8 @@ TagManager:
   - cat
   - esp
   - eng
+  - Piece
+  - Balloon
   layers:
   - Default
   - TransparentFX

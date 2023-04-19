@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3338845616505384124}
   m_Layer: 0
   m_Name: pinkExplosion
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

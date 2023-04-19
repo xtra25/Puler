@@ -19,9 +19,26 @@ public class BalloonsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
-        
+        /*
+        int i = 0;
+        while (i < Input.touchCount)
+        {
+            Touch t = Input.GetTouch(i);
+            if (t.phase == TouchPhase.Began)
+            {
+                //Debug.Log("touch began");
+
+               Vector2 touch = Input.GetTouch(i).position;
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(touch), Vector2.zero);
+                if (hit.collider != null && hit.collider.name.Contains("(Balloon)"))
+                {
+                    OnTouchBalloon(hit);
+                }
+            }
+            i++;
+        }
+
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Input.mousePosition;
@@ -30,28 +47,12 @@ public class BalloonsController : MonoBehaviour
        else if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
             screenPosition = Input.GetTouch(0).position;
         else return;
-        
-
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
-
-        if (hit.collider != null)
-        {
-           
-            if (hit.collider.name.Contains("(Balloon)"))
-            {
-               
-                OnTouchBalloon(hit);
-            }
-                
-
-        }
+        */
     }
 
 
-    private void OnTouchBalloon(RaycastHit2D hit)
-    {
-       
+    public void OnTouchBalloon(RaycastHit2D hit)
+    {      
      
         string ballonName = hit.collider.transform.name.Replace("(Balloon)", "").Trim();
         foreach (GameObject explosion in explosionPrefab)

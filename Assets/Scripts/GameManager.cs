@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,14 +22,26 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {    
+         
         
+       
 
-        soundManager = FindObjectOfType<SoundManager>();
-   
-        soundManager.UnloadPiecesSounds();
-        soundManager.LoadPiecesSounds();
-        spawnController = FindObjectOfType<SpawnController>();
+        try
+        {
+            spawnController = FindObjectOfType<SpawnController>();
+            soundManager = FindObjectOfType<SoundManager>();
+            soundManager.UnloadPiecesSounds();
+            soundManager.LoadPiecesSounds();
+            
+          
+        }
+        catch (Exception )
+        {
+            Console.WriteLine("Something went wrong.");
+        }
+       
+
         uIController = FindObjectOfType<UIController>();
         spawnController.LoadBackgrounds();
         spawnController.ChangeBackground();
@@ -37,8 +49,6 @@ public class GameManager : MonoBehaviour
         spawnController.RandoomizeOrNot();        
         spawnController.MakePieces();
         slotsRemains = slotsToFill;
-
-
     }
 
 

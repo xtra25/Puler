@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.InputSystem;
 
 public class SpawnController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class SpawnController : MonoBehaviour
 
     [SerializeField] Piece newPiece;
     [SerializeField] Slot newSlot;
-    [SerializeField] Balloon newBallon;
+    [SerializeField] Balloon newBalloon;
     [SerializeField] Sprite[] BalloonSprites;
     public List<int> randomSprites = new List<int>();
    
@@ -22,9 +23,7 @@ public class SpawnController : MonoBehaviour
     Piece[] cleaningPieces;
     Slot[] cleaningSlots;
     Sprite[] backgroundSprites;
-
     string chosenGame = InterSceneVars.ChosenGame;
-
     GameManager gameManager;
 
     private void Start()
@@ -76,8 +75,10 @@ public class SpawnController : MonoBehaviour
 
         Piece tempPiece = Instantiate(newPiece, new Vector3(xOffset, 3.3F, 0), Quaternion.identity);
         GameObject tempPieceAsGO = tempPiece.gameObject;
-        PolygonCollider2D polygonCollider2D = tempPieceAsGO.AddComponent<PolygonCollider2D>();
-        polygonCollider2D.isTrigger = true;
+        //  PolygonCollider2D polygonCollider2D = tempPieceAsGO.AddComponent<PolygonCollider2D>();
+        //  polygonCollider2D.isTrigger = true;
+        CircleCollider2D circleCollider2D = tempPieceAsGO.AddComponent<CircleCollider2D>();
+        circleCollider2D.isTrigger = true;
         tempPiece.name = tempPiece.name.Replace("(Clone)", "(Piece)").Trim();
         //tempPiece.tag = "Clean";
         MakeSlot(pieceName, pieceSprite);
@@ -117,7 +118,7 @@ public class SpawnController : MonoBehaviour
         circleCollider2D.isTrigger = true;
         circleCollider2D.radius = 0.2F;
         tempSlot.name = tempSlot.name.Replace("(Clone)", "(Slot)").Trim();
-
+     //   tempSlot.GetComponent<PlayerInput>().enabled = false;
     }
 
 
@@ -226,9 +227,9 @@ public class SpawnController : MonoBehaviour
             int randomBalloonSprite = Random.Range(0, BalloonSprites.Length);
             Sprite balloonSprite = BalloonSprites[randomBalloonSprite];
             string balloonName = balloonSprite.name;
-            newBallon.name = balloonName;
-            newBallon.GetComponent<SpriteRenderer>().sprite = balloonSprite;
-            Balloon rename = Instantiate(newBallon, new Vector3(randomX, -7F, 0), Quaternion.identity);
+            newBalloon.name = balloonName;
+            newBalloon.GetComponent<SpriteRenderer>().sprite = balloonSprite;
+            Balloon rename = Instantiate(newBalloon, new Vector3(randomX, -7F, 0), Quaternion.identity);
             rename.name = rename.transform.name.Replace("(Clone)", "(Balloon)").Trim();     
 
 

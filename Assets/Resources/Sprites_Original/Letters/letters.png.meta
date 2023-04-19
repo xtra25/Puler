@@ -111,7 +111,7 @@ TextureImporter:
       213: 622991759595047286
     second: letters_35
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -132,6 +132,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -140,9 +141,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -170,6 +171,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -221,6 +223,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -790,6 +804,33 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      letters_0: 4960786064670890729
+      letters_1: -4852599247930021020
+      letters_10: -8242121772128422248
+      letters_11: 6195486373906446128
+      letters_12: 6146893161713882321
+      letters_13: -548447544175181320
+      letters_14: 1263410834974956660
+      letters_15: 2750425216728354804
+      letters_16: 1813979374959700668
+      letters_17: 1072034066292483253
+      letters_18: -7557459266990561573
+      letters_19: -171062933042576281
+      letters_2: -6911649394574019575
+      letters_20: 3111392551537952365
+      letters_21: -9171288963407139435
+      letters_22: 3274802467222728976
+      letters_23: 4008260242634411360
+      letters_24: 5701150949504145017
+      letters_25: 1256163749972872025
+      letters_3: -7556419973484196542
+      letters_4: -4243150960148158609
+      letters_5: -8216232453128229362
+      letters_6: -7036722692260827037
+      letters_7: -7734636680867374980
+      letters_8: 5921410745264522721
+      letters_9: 5871723506886696221
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

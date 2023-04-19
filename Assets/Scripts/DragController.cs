@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
+using System.Linq;
 
 public class DragController : MonoBehaviour
 {
@@ -8,25 +12,29 @@ public class DragController : MonoBehaviour
 
     private bool isDragActive = false;
 
-    private Vector2 screenPosition;
-
-    private Vector3 worldPosition;
-
-    private Piece lastDraggedPiece;
-
     private Vector2 originalPosition;
 
-    Piece draggablePiece;
+    Piece selectedPiece;
+    Vector3 fingerTouchPos;
 
     GameManager gameManager;
     SoundManager soundManager;
+
+    private int fingerId = -1; // keep track of the finger id of the touch that is currently interacting with the target object
+
+    private Finger MovementFinger;
+    public Vector2 MovementAmount;
+    private Finger currentFinger;
+    private int fingerBtnTouchId;
+
+    BalloonsController balloonController;
+
 
     private void Awake()
     {
         DragController[] controller = FindObjectsOfType<DragController>();
         if (controller.Length < 1)
         {
-
             Destroy(gameObject);
         }
 
@@ -35,88 +43,180 @@ public class DragController : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         soundManager = FindObjectOfType<SoundManager>();
+        balloonController = FindObjectOfType<BalloonsController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isDragActive)
-        {
-            if ((Input.GetMouseButtonUp(0) || (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)))
-            {
 
-                Drop();
-                return;
-            }
-        }
-        if (Input.GetMouseButton(0))
+    private void OnEnable()
+    {
+        EnhancedTouchSupport.Enable();
+        ETouch.Touch.onFingerDown += HandleFingerDown;
+        ETouch.Touch.onFingerUp += HandleFingerUp;
+        ETouch.Touch.onFingerMove += HandleFingerMove;
+    }
+
+    private void OnDisable()
+    {
+        ETouch.Touch.onFingerDown -= HandleFingerDown;
+        ETouch.Touch.onFingerUp -= HandleFingerUp;
+        ETouch.Touch.onFingerMove -= HandleFingerMove;
+        EnhancedTouchSupport.Disable();
+
+    }
+
+   
+    private void HandleFingerDown(Finger finger)
+    {
+        // print("fingerDown");
+        ExplodeBalloons(finger);
+
+        if (IsFingerTouchingTarget(finger)) // check if the finger is touching the target GameObject
         {
-            Vector3 mousePos = Input.mousePosition;
-            screenPosition = new Vector2(mousePos.x, mousePos.y);
-        } 
-        else if (Input.touchCount < 0)
-            screenPosition = Input.GetTouch(0).position;
-        else
-        {
-          return;
+            fingerId = finger.index; // store the finger id of the touch that is interacting with the target object
+        
         }
-        worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+    }
+
+    private void HandleFingerUp(Finger finger)
+    {
+        if (finger.index == fingerId) // check if the lifted finger is the one that was interacting with the target object
+        {
+            fingerId = -1; // reset the finger id
+                          
+            Drop();
+        }
+    }
+
+    private void HandleFingerMove(Finger finger)
+    {
        
-
-        if (isDragActive)
+        if (finger.index == fingerId && IsFingerTouchingTarget(finger)) // check if the finger is the one that is interacting with the target object and is still touching the object
         {
-            Drag();
-        }
-        else
-        {
-            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
-            if (hit.collider!= null)
+    
+            if (selectedPiece != null)
             {
-                draggablePiece = hit.transform.gameObject.GetComponent<Piece>();
-                if (draggablePiece != null )
-                {
-                    lastDraggedPiece = draggablePiece;
-                    if (draggablePiece.isDraggable)
-                    {
-                        initDrag();
-                    }
-                }
+                print("fingerMove withPiece Selected");
+                selectedPiece.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(finger.currentTouch.screenPosition.x, finger.currentTouch.screenPosition.y, 1));
             }
         }
     }
 
-    void initDrag()
+    private bool IsFingerTouchingTarget(Finger finger)
     {
-        isDragActive = true;
-        originalPosition = draggablePiece.transform.position;
-    }
-
-    private void Drag()
-    {
-        lastDraggedPiece.transform.position = new Vector2(worldPosition.x, worldPosition.y);
-    }
-
-    void Drop()
-    {
-        isDragActive = false;
-        if (draggablePiece.isTheSlot)
+        foreach (var touch in finger.touchHistory) // loop through all the touches associated with the finger
         {
-            draggablePiece.transform.position = draggablePiece.SlotPosition;
-            draggablePiece.isDraggable = false;
-            draggablePiece.tag = "Dragged";
-            gameManager.SlotsToFill--;
-            string piecename = draggablePiece.name;
-            piecename = piecename.Replace("(Piece)", "");
-            soundManager.PlayPiece(piecename);
+            fingerTouchPos = finger.screenPosition;
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(fingerTouchPos), Vector2.zero);
 
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Piece") && hit.collider.GetComponent<Piece>().isDraggable)
+                {
+                    if (selectedPiece == null)
+                    {
+                        SelectPiece(hit.collider);
+                    }                    
+                    return true;
+                }
+            }         
+        }
+        return false;
+    }
+
+    private void ExplodeBalloons(Finger finger)
+    {
+        fingerTouchPos = finger.screenPosition;
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(fingerTouchPos), Vector2.zero);
+
+        if (hit.collider != null && hit.collider.CompareTag("Balloon"))
+        {
+            balloonController.OnTouchBalloon(hit);
+            return;
+        }
+    }
+
+
+    private void SelectPiece(Collider2D hitSomething)
+    {
+         
+        if (hitSomething.GetComponent<Piece>().isDraggable && !hitSomething.GetComponent<Piece>().isFinished)
+        {
+            selectedPiece = hitSomething.transform.gameObject.GetComponent<Piece>();
+            OnlyOneMoving();
+            isDragActive = true;
+            originalPosition = selectedPiece.transform.position;
         }
         else
         {
-            draggablePiece.transform.position = originalPosition;
-            soundManager.PlaySound("piecesMoved");
+            selectedPiece = null;
+            RestoreMoving();
+            isDragActive = false;
+        }
+        
+        
+    }
+
+    private void OnlyOneMoving()
+    {
+        Piece[] pieces = FindObjectsOfType<Piece>();
+        foreach (Piece p in pieces)
+        {
+            if (p.name != selectedPiece.name)
+            {
+                p.isDraggable = false;
+            }
+        }
+    }
+
+    private void RestoreMoving()
+    {
+        Piece[] pieces = FindObjectsOfType<Piece>();
+        foreach (Piece p in pieces)
+        {
+            if (!p.isFinished)
+            {
+                p.isDraggable = true;
+            }
+        }
+    }
+ 
+
+    public void Drop()
+    {
+        if (isDragActive)
+        {
+            isDragActive = false;
+            RestoreMoving();
+            if (selectedPiece.isTheSlot)
+            {
+                selectedPiece.transform.position = selectedPiece.SlotPosition;
+                selectedPiece.isDraggable = false;
+                selectedPiece.isFinished = true;
+                selectedPiece.tag = "Dragged";
+                gameManager.SlotsToFill--;
+                string piecename = selectedPiece.name;
+                piecename = piecename.Replace("(Piece)", "");
+                if (soundManager != null)
+                {
+                    soundManager.PlayPiece(piecename);
+                }
+               
+
+            }
+            else
+            {
+                selectedPiece.transform.position = originalPosition;
+                if (soundManager != null)
+                {
+                    soundManager.PlaySound("piecesMoved");
+                }
+               
+
+            }
 
         }
-            
+        selectedPiece = null;
+
     }
 
 

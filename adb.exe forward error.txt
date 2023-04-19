@@ -1,0 +1,25 @@
+
+
+Try these steps in-order:
+
+    In Unity, go to Edit -> Project Settings -> Editor, and set the "Device" to "Any Android Device"
+
+    Plug-in your phone.
+
+    Switch the connection type to USB tethering. ( compartir internet x usb)
+
+    Enable developer mode (if already ON then switch it OFF before plugging in your phone)
+
+    Enable USB debugging (if already ON then switch it OFF before plugging in your phone)
+
+When you will turn on USB debugging your phone will ask to allow the connected PC to access the RSA, allow it.
+
+    Now, switch the connection mode to "USB for Transferring files/Android Auto", the phone will again ask to allow the computer to access the RSA, allow it.
+
+    In Unity, go to File -> Build Settings, then select your device (which will now be visible in the "Run Device" dropdown).
+
+    Now, open Unity Remote 5 on your device.
+
+    Hit play in Unity Editor.
+
+It works for me! Hope this helps :)

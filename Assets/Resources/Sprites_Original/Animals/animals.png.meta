@@ -66,7 +66,7 @@ TextureImporter:
       213: 1824422802616795261
     second: animals_20
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -87,6 +87,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -95,9 +96,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -125,6 +126,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -176,6 +178,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -640,6 +654,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      animals_0: -10524483601426386
+      animals_1: 5758861361426822821
+      animals_10: 6284572508141158567
+      animals_11: -3482606926889630891
+      animals_12: 110477935721402790
+      animals_13: 3117204224443578919
+      animals_14: -1601326401201788047
+      animals_15: -1108939863998677119
+      animals_16: -8111778111241485788
+      animals_17: 446962508067046564
+      animals_18: -2295827043839239567
+      animals_19: 5305343351223448175
+      animals_2: -1319315252296537693
+      animals_20: 1824422802616795261
+      animals_3: 8133266208652056809
+      animals_4: 8297040362687464060
+      animals_5: 3277387584969892780
+      animals_6: 6591381469864738340
+      animals_7: 7913660522167358954
+      animals_8: -953346549932427826
+      animals_9: 3691526897687444597
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

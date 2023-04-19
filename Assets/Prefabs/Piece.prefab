@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5778136172489296086}
   m_Layer: 3
   m_Name: Piece
-  m_TagString: Untagged
+  m_TagString: Piece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1991265403
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6b729f4989701e64ca463ab7dd47bfc7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60ef5558d550fce4884d271ea2d8348e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDragging: 0
   isDraggable: 1
+  isFinished: 0
   isTheSlot: 0
   SlotPosition: {x: 0, y: 0}
 --- !u!50 &-5778136172489296086
