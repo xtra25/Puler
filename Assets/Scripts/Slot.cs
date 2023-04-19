@@ -12,14 +12,4 @@ public class Slot : MonoBehaviour
     [SerializeField] public bool isDragable = false;
 
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

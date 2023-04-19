@@ -26,16 +26,8 @@ public class SpawnController : MonoBehaviour
     string chosenGame = InterSceneVars.ChosenGame;
     GameManager gameManager;
 
-    private void Start()
-    {
-        
-          
-    }
-
-
     public void MakePieces()
-    {
-       
+    {  
 
         gameManager = GetComponent<GameManager>();
         int numPieces = gameManager.SlotsToFill;

@@ -30,13 +30,6 @@ public class MainMenuController : MonoBehaviour
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[selectedLocale];
     }
 
-
-        // Update is called once per frame
-        void Update()
-    {
-
-    }
-
     public void StartAnimals()
     {
         if (loadingScene == true)

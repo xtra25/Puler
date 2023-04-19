@@ -18,12 +18,6 @@ public class UIController : MonoBehaviour
         soundManager = FindObjectOfType<SoundManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     internal void WonBalloons()
     {
         GameObject btnBack = GameObject.Find("BtnBack");

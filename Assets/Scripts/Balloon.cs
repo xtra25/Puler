@@ -25,16 +25,8 @@ public class Balloon : MonoBehaviour
 
         StartCoroutine(EndBalloons());
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-        
+    } 
     
-   
 
     IEnumerator EndBalloons()
     {
@@ -78,10 +70,5 @@ public class Balloon : MonoBehaviour
 
         }
     }
-
- 
-
-
- 
 }
 
